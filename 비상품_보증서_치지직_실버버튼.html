@@ -48,6 +48,7 @@
     .detail-row .value { color: #c0c0c0; }
     .bottom-buttons { display: flex; gap: 12px; margin-top: 24px; }
     .bottom-buttons .btn { flex: 1; padding: 14px 16px; border-radius: 12px; font-size: 0.9375rem; font-weight: 500; text-align: center; border: 1px solid rgba(125,211,184,0.4); background: rgba(26,58,46,0.9); color: #fff; cursor: pointer; text-decoration: none; }
+    .flip-trigger-zone { position: absolute; top: 0; right: 0; width: 50%; height: 100%; z-index: 10; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -90,6 +91,7 @@
         <div class="rotate-wrap">
           <button type="button" class="btn-rotate" id="btnRotate" aria-label="뒷면 보기">↺ 180°</button>
         </div>
+        <div class="flip-trigger-zone" role="button" tabindex="0" aria-label="화면 뒤집기" title="우측 영역 클릭 시 뒷면으로"></div>
       </div>
       <div class="flip-face back">
         <header class="header">
@@ -107,6 +109,7 @@
         <div class="rotate-wrap">
           <button type="button" class="btn-rotate" id="btnRotateBack" aria-label="앞면 보기">↺ 180°</button>
         </div>
+        <div class="flip-trigger-zone" role="button" tabindex="0" aria-label="화면 뒤집기" title="우측 영역 클릭 시 앞면으로"></div>
       </div>
     </div>
   </section>
@@ -118,6 +121,8 @@
       function flip() { wrapper.classList.toggle('flipped'); }
       if (btnFront) btnFront.addEventListener('click', flip);
       if (btnBack) btnBack.addEventListener('click', flip);
+      var zones = document.querySelectorAll('.flip-trigger-zone');
+      for (var i = 0; i < zones.length; i++) zones[i].addEventListener('click', flip);
     })();
   </script>
 </body>
